@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>test3</title>
+        <style>
+            section.todoapp{
+                background-image:url(http://7img1.tianlaikge.com/tv/homeimage/201912/1575279557986.jpg);
+                background-position-x: center;
+                background-position-y: center;
+                background-repeat:no-repeat; 
+                background-size: 750px,1670px;
+                width: 400px;
+                border-radius: 15px;
+                position: relative;
+                left: 500px;
+            }
+            button.destroy{
+                border-radius: 10px;
+                position: relative;
+            }
+            button.clear-completed{
+                border-radius: 10px;
+            }
+            h1{
+                text-align: center;
+            }
+            input{
+                width: 300px;
+                height: 30px;
+                border-radius: 8px;
+
+            }
+        </style>
+    </head>
+    <body>
+        <section id="todoapp" class="todoapp">
+            <header class="header">
+                <h1>记事本</h1>
+                <input v-model="inputValue" @keyup.enter="add" autofocus="autofocus" autocomplete="off" placeholder="请输入任务" class="new-todo">
+            </header>
+            <section class="main">
+                <ul>
+                    <li class="todo" v-for="(item,index) in list" :itme="itme">
+                        <div class="view">
+                            <span class="index">{{index+1}}.</span>
+                            <label>{{ item }}</label>
+                            <button class="destroy" @click="remove(index)">X</button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer" v-if="list.length != 0">
+                <span class="todo-count">
+                    <strong>{{list.length}}</strong> itmes left
+                </span>
+                <button class="clear-completed" @click="clear">clear</button>
+            </footer>
+        </section>
+        <footer class="info">
+
+        </footer>
+        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            var todoapp = new new Vue({
+                el:"#todoapp",
+                data:{
+                    list:["写代码","吃饭","睡觉"],
+                    inputValue:"好好学习，天天向上"
+                },
+                methods: {
+                    add:function(){
+                        this.list.push(this.inputValue);
+                    },
+                    remove:function(index){
+                        this.list.splice(index,1);
+                    },
+                    clear:function(){
+                        this.list=[]
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>axios</title>
+    </head>
+    <body>
+        
+        <div id="app">
+            <input type="button" value="get请求" class="get" @click="getJoke()">
+           <p> {{message}}</p>
+        </div>
+        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!-- 官方提供的axios在线地址 -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            var app = new Vue({
+                el:"#app",
+                data:{
+                    message:"nihao"
+                },
+                methods: {
+                    getJoke:function(){
+                        var that = this;
+                        axios.get("https://autumnfish.cn/api/joke").then(
+                            function(response){
+                                console.log(response)
+                                that.message=response.data;
+                            },function(err){
+                                that.message=err;
+                            }
+                        )
+                    }
+                }
+            
+            })  
+           
+        </script>
+    </body>
+</html>

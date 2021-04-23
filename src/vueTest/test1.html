@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <img src="../../static/images/01.jpeg">
+        <input type="button" value="添加按钮" @click="add()">
+        <input type="button" value="减少按钮" @click="sub()">
+        <input type="text" v-model="message">
+        {{message}}
+        <ul>
+            <li v-for="(index,itme) in arr" :title="itme">
+                {{index}}===={{itme}}
+            </li>
+        </ul>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 --> 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"测试",
+               arr:["北京","上海","广州","深圳"]
+            },
+            methods: {
+                add:function(){
+                    this.arr.push(this.arr.length)
+                },
+                sub:function(){
+                    this.arr.shift()
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

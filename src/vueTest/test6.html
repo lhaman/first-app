@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <style type="css/text">
+            li{
+                margin:0; padding:0; list-style-type:none
+            }
+        </style>
+    </head>
+    <body>
+        <div id="music">
+            <div style="background-color: cornflowerblue;height: 50px;width: 100%; position: fixed;left: 0%;top: 0px;"><span style="font-size: 25px;font-family: Georgia, serif;position: fixed;left: 1%; top: 6px;">音悦台</span><input type="text" v-model="keywords" placeholder="请输入歌手" @keyup.enter="serachMusic" style=" width: 30%; height: 30px; border-radius: 10px;position: fixed;right: 1%;top: 6px;"></div>
+            <div style="width: 100%; height: 85%;" >
+                <div style="width: 25%;height: 85%;overflow:auto;background:#0b517a;position: fixed;left: 0%;top: 50px;">
+                    <div v-for="itme in resultList" style="left: 1%;">
+                        <div style="height: 40px;font-family: Georgia, serif;"><span><a href="javascript::" @click="playSong(itme.id)">播放</a></span><span>{{itme.name}}</span><span><a href="javascript::" v-if="itme.mvid!=0" @click="playMV(itme.mvid)">MV</a></span></div>                    
+                    </div>
+                </div>
+                <div style="width: 50%;height: 85%;background:#0993bd; position: fixed;left: 25%;top: 50px;"><img :src="imageUrl" style="width: 200px; height: 200px; border-radius: 100px;position: fixed;left: 45%;top: 25%;"></div>
+                <div style="width: 25%;height: 85%;overflow:auto;background:#3944a5; position: fixed;left: 75%;top: 50px;">
+                    <dl v-for=" itme in commentList ">
+                        <div >
+                            <div style="height: 40px;"><img :src="itme.user.avatarUrl" style="width: 30px; height: 30px; border-radius: 15px"><span style="font-size: 25px">{{itme.user.nickname}}</span></div>
+                            <p>{{itme.content}}</p>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+            <div><audio ref="audio" :src="musicUrl" @play="play" @pause="pause" controls autoplay loop style="width: 100%;position: fixed;left: 0%;bottom: 0px;"></audio></div>
+            <div v-show="isShow" style="display: none;position: relative;z-index: 3;">
+                <video :src="mvUrl" controls="controls"></video>
+                <div @click="hide"></div>
+            </div>
+        </div>
+        <!-- 官方提供的axios在线地址 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="../../static/js/main.js"></script>
+    </body>
+</html>
